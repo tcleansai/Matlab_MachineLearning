@@ -15,7 +15,7 @@ end
 [nSmp,nFea] = size(fea1);
 
 error = []; dim =10; %%check recognition rate every dim dimensions (change it appropriatly for PCA, LDA etc)
-for jj = 1:2  %%%run for 20 random pertrurbations
+for jj = 1:20  %%%run for 20 random pertrurbations
     jj
     
     eval(['load 5Train/' num2str(jj)]); %%% load the pertrurbation number jj
@@ -27,11 +27,8 @@ for jj = 1:2  %%%run for 20 random pertrurbations
     gnd_Test = gnd(testIdx);
 
     %U_reduc = eye(size(64*64,64*64));  %%change it to PCA, LDA, etc
-    %U_reduc = PCA1(fea_Train);
-    %U_reduc = WPCA1(fea_Train);
     %U_reduc = LDA1(fea_Train,gnd_Train);
-    %U_reduc = LPP1(fea_Train);
-    U_reduc = LPP2(fea_Train);
+    U_reduc = ICA1(fea_Train);
     oldfea = fea_Train*U_reduc;  %%training data 
     
     newfea = fea_Test*U_reduc;   %%test data

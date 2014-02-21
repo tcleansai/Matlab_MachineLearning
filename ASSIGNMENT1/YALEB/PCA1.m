@@ -1,33 +1,35 @@
-function [U, V] = PCA1(dataIn)
-%This is a PCA used to calculate the
-%Input:
-%      dataIn is the input data source
-%      dim is the original data would reduce
-%Output:
-%      U is the eignvector of covariance matrix
-%      V is the eignvalue of the covariance matrix
+function [W] = PCA1(X)
+%This is PCA function to calculate the projection matrix
 %
-%Writtern by Wenyang Cai, Feb 18, 2013
+% It is only suitable for the situation that the sample number is
+% less or equal dimension number
+%
+%Input:
+%      X is the input data source
+%           where the each row is a sample and each column is a feature
+%Output:
+%      W is the projection matrix
+%           size of W should be nfea*(nsmp-1) where nfea is the number of
+%           feature
+%Writtern by Wenyang Cai, Feb 21, 2013
 %
 
-mean_dataIn = mean(dataIn, 1);%mean of samples
+%sample size
+[nsmp,~]= size(X);
+
+%mean of samples
+mean_X = mean(X, 1);
 
 % substract mean
-data = dataIn - repmat(mean_dataIn,size(dataIn,1),1);
+X = X - repmat(mean_X,size(X,1),1);
 
-% calculate the covariance matrix
-matrix = data*data';
+matrix = X*X';
 
 % calculate the eignvector and eignvalue
+[U, V] = eigs(matrix,nsmp-1);
 
-[U, V] = eig(matrix);
-V = diag(V);
-U = data'*U*diag(V.^(-0.5));
-
-% sort the eignvalue and eignvector in descend order of eignvalue
-[V, idx] = sort(V,'descend');
-U = real(U(:,idx));
-%U = U(:,1:size(dataIn,2));
+% calculate projection matrix
+W = X'*U*diag(diag(V).^(-0.5));
 
 end
 

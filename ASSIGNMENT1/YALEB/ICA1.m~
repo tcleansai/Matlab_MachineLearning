@@ -63,7 +63,7 @@ for i = 1:nfea
         % normalize vector
         W_GS = W_GS/norm(W_GS);
         
-        %1 - abs(W_GS*w_new')
+        1 - abs(W_GS*w_new')
         if 1 - abs(W_GS*w_new') < 0.01
             converged = true;
         end

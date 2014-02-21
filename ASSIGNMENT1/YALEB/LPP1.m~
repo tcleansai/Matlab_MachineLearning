@@ -56,10 +56,12 @@ U = X_w*U_w*diag(diag(V_w).^-1);
 %
 matrix = U'*X'*(D-S)*X*U;
 
-% get Q
+%
 [Q,~] = eig(matrix);
 
-% Calculate W
+%
+Q = Q(:,2:size(Q,1));
+
 W = U*Q;
 
 end
