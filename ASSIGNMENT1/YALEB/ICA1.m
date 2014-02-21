@@ -51,25 +51,25 @@ for i = 1:nfea
         W(i,:) = w_new;
         
         % perform Gram Schmidt method
-        W_GS = w_new;
-        if i > 1
-            tmp = 0;
-            for j = 1:i-1
-                tmp = tmp + W(j,:)*W(j,:)'*W_GS; 
-            end
-            W_GS = W_GS - tmp;
-            W_GS = W_GS/((W_GS*W_GS').^0.5);
-        end
-        % normalize vector
-        W_GS = W_GS/norm(W_GS);
-        
-        %1 - abs(W_GS*w_new')
-        if 1 - abs(W_GS*w_new') < 0.01
+%         W_GS = w_new;
+%         if i > 1
+%             tmp = 0;
+%             for j = 1:i-1
+%                 tmp = tmp + W(j,:)*W(j,:)'*W_GS; 
+%             end
+%             W_GS = W_GS - tmp;
+%             W_GS = W_GS/((W_GS*W_GS').^0.5);
+%         end
+%         % normalize vector
+%         W_GS = W_GS/norm(W_GS);
+%         
+%         %1 - abs(W_GS*w_new')
+%         if 1 - abs(W_GS*w_new') < 0.01
             converged = true;
-        end
-        if i > 1
-            W(i,:) = W_GS;
-        end
+%         end
+%         if i > 1
+%             W(i,:) = W_GS;
+%         end
     end
 end
 %de whitening

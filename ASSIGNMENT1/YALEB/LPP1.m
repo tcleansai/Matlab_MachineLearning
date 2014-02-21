@@ -5,7 +5,7 @@ function [ W ] = LPP1(X)
 
 X = X - repmat(mean(X),nsmp,1);
 
-t = 1000.0;
+t = 1000000.0;
 
 dis = zeros(size(X,1));
 for i = 1:size(X,1)
@@ -14,7 +14,7 @@ for i = 1:size(X,1)
         dis(i,j) = tmp*tmp';
     end
 end
-dis = dis.^(0.5);
+%dis = dis.^(0.5);
 
 S = exp(-dis/t);
 

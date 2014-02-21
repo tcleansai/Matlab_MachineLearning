@@ -14,8 +14,8 @@ end
 
 [nSmp,nFea] = size(fea1);
 
-error = []; dim =10; %%check recognition rate every dim dimensions (change it appropriatly for PCA, LDA etc)
-for jj = 1:20  %%%run for 20 random pertrurbations
+error = []; dim =2; %%check recognition rate every dim dimensions (change it appropriatly for PCA, LDA etc)
+for jj = 1:50  %%%run for 20 random pertrurbations
     jj
     
     eval(['load 5Train/' num2str(jj)]); %%% load the pertrurbation number jj
@@ -59,4 +59,5 @@ for jj = 1:20  %%%run for 20 random pertrurbations
 
 end
 
-plot(mean(error,1)); %%plotting the error 
+plot(mean(error,1)); %%plotting the error
+save('IDA_error','error');
